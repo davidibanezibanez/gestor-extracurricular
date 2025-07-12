@@ -1,0 +1,1360 @@
+{
+	"info": {
+		"_postman_id": "8f4392e1-ef2a-480d-89ef-c20064dd3ec2",
+		"name": "backend-gestor-actividades-extracurriculares",
+		"description": "Colección completa para probar todos los microservicios del backend vps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34055569"
+	},
+	"item": [
+		{
+			"name": "AUTH SERVICE (Port 8080)",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin_users_test2\",\n  \"password\": \"1234\",\n  \"roleRequest\": {\n    \"roleListName\": [\"ADMIN_USERS\"]\n  }\n}"
+						},
+						"url": {
+							"raw": "http://200.13.4.247:8080/auth/sign-up",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin_users_test\",\n  \"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "http://200.13.4.247:8080/auth/log-in",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"log-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8080/auth/validate-token",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"validate-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://200.13.4.247:8080/auth/user/admin_users_test",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"user",
+								"admin_users_test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USER SERVICE (Port 8081)",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8081/users",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8081",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by Username",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8081/users/admin_users_test",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"admin_users_test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin_users_test\",\n  \"email\": \"ejemplo@university.com\",\n  \"role\": \"ADMIN_USERS\",\n  \"profilePicture\": \"url\"\n}"
+						},
+						"url": {
+							"raw": "http://200.13.4.247:8081/users",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8081",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"email2@university.com\",\n  \"profilePicture\": \"url2\"\n}"
+						},
+						"url": {
+							"raw": "http://200.13.4.247:8081/users/admin_users_test",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"admin_users_test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8081/users/a",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enable User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8081/users/admin_users_test/enable",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"admin_users_test",
+								"enable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8081/users/admin_users_test/disable",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"admin_users_test",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users by Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8081/users/role/ADMIN_USERS",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"role",
+								"ADMIN_USERS"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ACTIVITY SERVICE (Port 8082)",
+			"item": [
+				{
+					"name": "Get All Activities",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8082/activities",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activity by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://200.13.4.247:8082/activities/1",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activities by Type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://200.13.4.247:8082/activities/type/DEPORTIVA",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"activities",
+								"type",
+								"DEPORTIVA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Activity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nameActivity\": \"Torneo de Fútbol Universitario\",\n  \"activityDate\": \"2025-12-01\",\n  \"typeActivity\": \"DEPORTIVA\",\n  \"startTime\": \"14:00:00\",\n  \"endTime\": \"18:00:00\",\n  \"maximumEnrollDate\": \"2025-11-15\",\n  \"maximumQuotas\": 50,\n  \"organizer\": \"Departamento de Deportes\",\n  \"description\": \"Torneo de fútbol inter-facultades. Participación gratuita con premiación para los primeros lugares.\",\n  \"activityPicture\": \"url\"\n}"
+						},
+						"url": {
+							"raw": "http://200.13.4.247:8082/activities",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Activity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nameActivity\": \"Torneo de Fútbol Universitario - ACTUALIZADO\",\n  \"maximumQuotas\": 60,\n  \"description\": \"Torneo de fútbol inter-facultades con nuevas categorías. Participación gratuita.\"\n}"
+						},
+						"url": {
+							"raw": "http://200.13.4.247:8082/activities/1",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Activity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8082/activities/2",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"activities",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enable Activity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8082/activities/1/enable",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"activities",
+								"1",
+								"enable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable Activity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8082/activities/1/disable",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"activities",
+								"1",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ENROLLMENT SERVICE (Port 8082)",
+			"item": [
+				{
+					"name": "Get Student Enrollments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8082/enrollments/student/student_test",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"enrollments",
+								"student",
+								"student_test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activity Enrollments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8082/enrollments/activity/1",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"enrollments",
+								"activity",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll Student in Activity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8082/enrollments/activity/1",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"enrollments",
+								"activity",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unenroll Student from Activity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8082/enrollments/activity/1",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"enrollments",
+								"activity",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check if Student is Enrolled",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8082/enrollments/activity/1/check/student_test",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8082",
+							"path": [
+								"enrollments",
+								"activity",
+								"1",
+								"check",
+								"student_test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "REPORT SERVICE (Port 8083)",
+			"item": [
+				{
+					"name": "Create Activity Completion Report (Internal)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"activityId\": 1,\n  \"activityName\": \"Torneo de Fútbol Universitario\",\n  \"activityDate\": \"2025-12-01\",\n  \"activityType\": \"DEPORTIVA\",\n  \"organizer\": \"Departamento de Deportes\",\n  \"completedStudents\": [\"student1\", \"student2\", \"student3\"],\n  \"totalCompletedStudents\": 3,\n  \"completionDate\": \"2025-12-01T18:00:00\"\n}"
+						},
+						"url": {
+							"raw": "http://200.13.4.247:8083/reports/activity-completion",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8083",
+							"path": [
+								"reports",
+								"activity-completion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Reports",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8083/reports",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8083",
+							"path": [
+								"reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Report by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8083/reports/1",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8083",
+							"path": [
+								"reports",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Report by Activity ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8083/reports/activity/1",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8083",
+							"path": [
+								"reports",
+								"activity",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reports by Type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8083/reports/type/DEPORTIVA",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8083",
+							"path": [
+								"reports",
+								"type",
+								"DEPORTIVA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reports by Date Range",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8083/reports/date-range?startDate=2025-01-01&endDate=2025-12-31",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8083",
+							"path": [
+								"reports",
+								"date-range"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2025-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-12-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pending External API Reports",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8083/reports/pending-external-api",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8083",
+							"path": [
+								"reports",
+								"pending-external-api"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retry External API Send",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://200.13.4.247:8083/reports/1/retry-external-api",
+							"protocol": "http",
+							"host": [
+								"200",
+								"13",
+								"4",
+								"247"
+							],
+							"port": "8083",
+							"path": [
+								"reports",
+								"1",
+								"retry-external-api"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "jwt_token",
+			"value": "your_jwt_token_here",
+			"type": "string"
+		}
+	]
+}

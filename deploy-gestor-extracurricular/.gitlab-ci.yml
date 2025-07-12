@@ -1,0 +1,19 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  tags:
+    - deploy
+  before_script:
+    - echo "$CI_JOB_TOKEN" | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+  script:
+    - echo "MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD" > .env
+    - echo "JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY" >> .env
+    - echo "AUTH_IMAGE=$CI_REGISTRY_IMAGE/extracurricular-auth-service:latest" >> .env
+    - echo "USER_IMAGE=$CI_REGISTRY_IMAGE/extracurricular-user-service:latest" >> .env
+    - echo "ACTIVITY_IMAGE=$CI_REGISTRY_IMAGE/extracurricular-activity-service:latest" >> .env
+    - echo "REPORT_IMAGE=$CI_REGISTRY_IMAGE/extracurricular-report-service:latest" >> .env
+    - echo "FRONTEND_IMAGE=$CI_REGISTRY_IMAGE/extracurricular_frontend_web:latest" >> .env
+    - docker compose --env-file .env pull
+    - docker compose --env-file .env up -d --build

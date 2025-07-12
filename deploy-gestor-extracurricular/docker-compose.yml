@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+
+  extracurricular-auth-service:
+    image: ${AUTH_IMAGE}
+    container_name: extracurricular-auth-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    restart: always
+
+  extracurricular-user-service:
+    image: ${USER_IMAGE}
+    container_name: extracurricular-user-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+      - extracurricular-auth-service
+    environment:
+      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    restart: always
+
+  extracurricular-activity-service:
+    image: ${ACTIVITY_IMAGE}
+    container_name: extracurricular-activity-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mysql
+      - extracurricular-auth-service
+    environment:
+      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    restart: always
+
+  extracurricular-report-service:
+    image: ${REPORT_IMAGE}
+    container_name: extracurricular-report-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mysql
+      - extracurricular-auth-service
+    environment:
+      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    restart: always
+
+  extracurricular_frontend_web:
+    image: ${FRONTEND_IMAGE}
+    container_name: extracurricular_frontend_web
+    ports:
+      - "80:80"
+    restart: always
+
+volumes:
+  mysql_data:

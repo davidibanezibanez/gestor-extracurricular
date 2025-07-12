@@ -1,0 +1,21 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  CI_REGISTRY_IMAGE: registry.gitlab.com/dci-project/arqsoft-dci/proyectos/1s2025/extracurricular/extracurricular_frontend_web
+
+stages:
+  - build
+
+build-and-push:
+  stage: build
+  only:
+    - main
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" $CI_REGISTRY
+    - docker build -t "$CI_REGISTRY_IMAGE:latest" .
+    - docker push "$CI_REGISTRY_IMAGE:latest"
